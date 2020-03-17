@@ -81,11 +81,13 @@ class Game:
 
     def findSolution(self):
         print(self.displayedNumbers)
+        solutionFound = False
         for combi in self.combi_list:
             n1 = self.displayedNumbers[combi[0]-1]
             n2 = self.displayedNumbers[combi[1]-1]
             n3 = self.displayedNumbers[combi[2]-1]
             n4 = self.displayedNumbers[combi[3]-1]
+            # Structure 1
             for op1 in self.operations:
                 for op2 in self.operations:
                     for op3 in self.operations:
@@ -94,12 +96,31 @@ class Game:
                         if number_1== np.inf or number_2 == np.inf:
                             continue
                         number = applyOp(number_1, number_2, op3)
-                        print(n1, op1, n2, op3, n3,op2, n4, number)
                         if number == np.inf:
                             continue
                         if int(number) == 24:
-                            print("Solution found: " + str(combi) + op1 + op2 + op3)
+                            print("Solution found! (see next row)")
+                            print("(", n1, op1, n2,")", op3, "(",n3,op2, n4,")", number)
+                            solutionFound = True
+            # Structure 2
+            for op1 in self.operations:
+                for op2 in self.operations:
+                    for op3 in self.operations:
+                        number_1 = applyOp(n1, n2, op1)
+                        if number_1== np.inf:
+                            continue
+                        number_2 = applyOp(number_1, n3, op2)
+                        if number_2== np.inf:
+                            continue
+                        number = applyOp(number_2, n4, op3)
+                        if number == np.inf:
+                            continue
+                        if int(number) == 24:
+                            print("Solution found! (see next row)")
+                            print("((", n1, op1, n2, ")", op2,n3, ")",op3, n4, number)
                             break
+        return solutionFound
+        
 
 
 def applyOp(a, b, op):
