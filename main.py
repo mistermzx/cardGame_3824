@@ -81,7 +81,7 @@ class Game:
 
     def findSolution(self):
         print(self.displayedNumbers)
-        solutionFound = False
+        numOfSolution = 0
         for combi in self.combi_list:
             n1 = self.displayedNumbers[combi[0]-1]
             n2 = self.displayedNumbers[combi[1]-1]
@@ -101,7 +101,7 @@ class Game:
                         if int(number) == 24:
                             print("Solution found! (see next row)")
                             print("(", n1, op1, n2,")", op3, "(",n3,op2, n4,")", number)
-                            solutionFound = True
+                            numOfSolution += 1
             # Structure 2
             for op1 in self.operations:
                 for op2 in self.operations:
@@ -118,8 +118,8 @@ class Game:
                         if int(number) == 24:
                             print("Solution found! (see next row)")
                             print("((", n1, op1, n2, ")", op2,n3, ")",op3, n4, number)
-                            break
-        return solutionFound
+                            numOfSolution += 1
+        return numOfSolution
         
 
 
@@ -184,7 +184,8 @@ def main():
     game = Game()
     while game.continuePlaying:
         game.displayCards()
-        game.findSolution()
+        numOfSolution = game.findSolution()
+        print(numOfSolution,  "were found!")
         print('Who won? (1 or 2 or 0 (nobody))')
         winner = int(input())
         game.addScore(winner)
