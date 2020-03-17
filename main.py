@@ -3,8 +3,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 from random import randint
 
-USE_SOLVER = True
-
 class Game:
 
     card_list = list()
@@ -73,6 +71,7 @@ class Game:
         fig, ax = plt.subplots()
         plt.bar(x, self.score)
         plt.xticks(x, ('Player 1', 'Player 2'))
+        plt.ylabel("# Cards")
         plt.title('Final Score\n' + 'Rounds played: ' + str(int(self.rounds_played)))
         plt.show()
         print('Thank you for playing!')
