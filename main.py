@@ -88,8 +88,6 @@ def generateCardList():
                 card_list.append(specialNumbers_list[i-11] + '_of_' + sign + '.png')
     return card_list
 
-
-
 def main():
     game = Game()
     while game.continuePlaying:
